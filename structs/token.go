@@ -3,7 +3,7 @@ package structs
 type Token struct {
 	Classe
 	Lexema string
-	Tipo
+	Tipo   *Tipo
 }
 
 type Tipo struct {

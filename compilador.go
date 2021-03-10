@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/ratacheski/go-mgol-compiler/structs"
+)
+
+var TabelaDeSimbolos = structs.NovaTabelaDeSimbolos()
 
 func main() {
-	fmt.Println("Hello World")
+	fmt.Println(TabelaDeSimbolos)
 }

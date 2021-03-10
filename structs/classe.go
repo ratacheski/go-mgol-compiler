@@ -20,6 +20,8 @@ const (
 	VAR_FIM           = "varfim"
 	ESCREVA           = "escreva"
 	LEIA              = "leia"
+	SE                = "se"
+	ENTAO             = "entao"
 	FIM_SE            = "fimse"
 	FACE_ATE          = "faca-ate"
 	FIM_FACA          = "fimfaca"
