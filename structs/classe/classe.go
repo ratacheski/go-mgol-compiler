@@ -1,4 +1,4 @@
-package structs
+package classe
 
 type Classe string
 

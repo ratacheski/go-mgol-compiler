@@ -1,77 +1,89 @@
 package structs
 
-type TabelaDeSimbolos []Token
+import (
+	"github.com/ratacheski/go-mgol-compiler/structs/classe"
+	"log"
+)
 
-func NovaTabelaDeSimbolos() (tabela TabelaDeSimbolos) {
+type SymbolTable []Token
+
+var TabelaDeSimbolos SymbolTable
+
+func init() {
+	log.Println("Inicializando Tabela de Símbolos")
+	TabelaDeSimbolos = TabelaDeSimbolos.NovaTabelaDeSimbolos()
+}
+
+func (tabela SymbolTable) NovaTabelaDeSimbolos() SymbolTable {
 	inicio := Token{
-		Classe: INICIO,
-		Lexema: INICIO,
+		Classe: classe.INICIO,
+		Lexema: classe.INICIO,
 	}
 	tabela = append(tabela, inicio)
 	varInicio := Token{
-		Classe: VAR_INICIO,
-		Lexema: VAR_INICIO,
+		Classe: classe.VAR_INICIO,
+		Lexema: classe.VAR_INICIO,
 	}
 	tabela = append(tabela, varInicio)
 	varFim := Token{
-		Classe: VAR_FIM,
-		Lexema: VAR_FIM,
+		Classe: classe.VAR_FIM,
+		Lexema: classe.VAR_FIM,
 	}
 	tabela = append(tabela, varFim)
 	escreva := Token{
-		Classe: ESCREVA,
-		Lexema: ESCREVA,
+		Classe: classe.ESCREVA,
+		Lexema: classe.ESCREVA,
 	}
 	tabela = append(tabela, escreva)
 	leia := Token{
-		Classe: LEIA,
-		Lexema: LEIA,
+		Classe: classe.LEIA,
+		Lexema: classe.LEIA,
 	}
 	tabela = append(tabela, leia)
 	se := Token{
-		Classe: SE,
-		Lexema: SE,
+		Classe: classe.SE,
+		Lexema: classe.SE,
 	}
 	tabela = append(tabela, se)
 	entao := Token{
-		Classe: ENTAO,
-		Lexema: ENTAO,
+		Classe: classe.ENTAO,
+		Lexema: classe.ENTAO,
 	}
 	tabela = append(tabela, entao)
 	fimSe := Token{
-		Classe: FIM_SE,
-		Lexema: FIM_SE,
+		Classe: classe.FIM_SE,
+		Lexema: classe.FIM_SE,
 	}
 	tabela = append(tabela, fimSe)
 	facaAte := Token{
-		Classe: FACE_ATE,
-		Lexema: FACE_ATE,
+		Classe: classe.FACE_ATE,
+		Lexema: classe.FACE_ATE,
 	}
 	tabela = append(tabela, facaAte)
 	fimFaca := Token{
-		Classe: FIM_FACA,
-		Lexema: FIM_FACA,
+		Classe: classe.FIM_FACA,
+		Lexema: classe.FIM_FACA,
 	}
 	tabela = append(tabela, fimFaca)
 	fim := Token{
-		Classe: FIM,
-		Lexema: FIM,
+		Classe: classe.FIM,
+		Lexema: classe.FIM,
 	}
 	tabela = append(tabela, fim)
 	inteiro := Token{
-		Classe: INTEIRO,
-		Lexema: INTEIRO,
+		Classe: classe.INTEIRO,
+		Lexema: classe.INTEIRO,
 	}
 	tabela = append(tabela, inteiro)
 	lit := Token{
-		Classe: LIT,
-		Lexema: LIT,
+		Classe: classe.LIT,
+		Lexema: classe.LIT,
 	}
 	tabela = append(tabela, lit)
 	tokenReal := Token{
-		Classe: REAL,
-		Lexema: REAL,
+		Classe: classe.REAL,
+		Lexema: classe.REAL,
 	}
 	tabela = append(tabela, tokenReal)
-	return
+	return tabela
 }
