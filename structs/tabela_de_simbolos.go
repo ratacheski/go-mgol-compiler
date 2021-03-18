@@ -14,6 +14,15 @@ func init() {
 	TabelaDeSimbolos = TabelaDeSimbolos.NovaTabelaDeSimbolos()
 }
 
+func AddTokenToSymbolTableIfNotExists(token Token) {
+	for _, item := range TabelaDeSimbolos {
+		if item.Lexema == token.Lexema {
+			return
+		}
+	}
+	TabelaDeSimbolos = append(TabelaDeSimbolos, token)
+}
+
 func (tabela SymbolTable) NovaTabelaDeSimbolos() SymbolTable {
 	inicio := Token{
 		Classe: classe.INICIO,
