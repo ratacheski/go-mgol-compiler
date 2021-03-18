@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"github.com/ratacheski/go-mgol-compiler/structs"
 	"log"
 	"os"
 )
@@ -16,8 +17,15 @@ var (
 
 func main() {
 	leArquivoFonte()
-	for index, line := range lines {
-		log.Println(index, ": ", line)
+	for _, line := range lines {
+		initialPosition := 0
+		for initialPosition < len(line) {
+			var token structs.Token
+			initialPosition, token = Scanner(initialPosition, line)
+			if token.Classe != "" {
+				log.Println(token)
+			}
+		}
 	}
 }
 

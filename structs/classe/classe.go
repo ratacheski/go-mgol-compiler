@@ -13,6 +13,7 @@ const (
 	OPM               = "OPM"
 	AB_P              = "AB_P"
 	FC_P              = "FC_P"
+	VIR               = "VIR"
 	PT_V              = "PT_V"
 	ERRO              = "ERRO"
 	INICIO            = "inicio"
