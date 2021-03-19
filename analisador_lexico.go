@@ -31,11 +31,22 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 		switch currentStatus {
 		case 0:
 			currentStatus = validaQ0(scannedValue[index])
-			if currentStatus != 0 && currentStatus != -1 {
+			if currentStatus == -1 {
+				finalPosition = initialPosition + index
+				token.Classe = classe.ERRO
+				token.Lexema = "erro1"
+				return
+			} else if currentStatus != 0 {
 				lexema = append(lexema, scannedValue[index])
 			}
 			break
 		case 1:
+			if index == len(scannedValue) {
+				finalPosition = initialPosition + index
+				token.Classe = classe.ERRO
+				token.Lexema = "erro2"
+				return
+			}
 			currentStatus = validaQ1(scannedValue[index])
 			lexema = append(lexema, scannedValue[index])
 			break
@@ -46,9 +57,13 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			return
 		case 3:
 			currentStatus = validaQ3(scannedValue[index])
-			if currentStatus != -1 {
-				lexema = append(lexema, scannedValue[index])
+			if currentStatus == -1 {
+				finalPosition = initialPosition + index
+				token.Classe = classe.ERRO
+				token.Lexema = "erro3"
+				return
 			}
+			lexema = append(lexema, scannedValue[index])
 			break
 		case 4:
 			if index == len(scannedValue) {
@@ -130,6 +145,12 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			}
 			break
 		case 9:
+			if index == len(scannedValue) {
+				finalPosition = initialPosition + index
+				token.Classe = classe.ERRO
+				token.Lexema = "erro4"
+				return
+			}
 			currentStatus = validaQ9(scannedValue[index])
 			lexema = append(lexema, scannedValue[index])
 			break
@@ -160,15 +181,23 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			return
 		case 16:
 			currentStatus = validaQ16(scannedValue[index])
-			if currentStatus != -1 {
-				lexema = append(lexema, scannedValue[index])
+			if currentStatus == -1 {
+				finalPosition = initialPosition + index
+				token.Classe = classe.ERRO
+				token.Lexema = "erro5"
+				return
 			}
+			lexema = append(lexema, scannedValue[index])
 			break
 		case 17:
 			currentStatus = validaQ17(scannedValue[index])
-			if currentStatus != -1 {
-				lexema = append(lexema, scannedValue[index])
+			if currentStatus == -1 {
+				finalPosition = initialPosition + index
+				token.Classe = classe.ERRO
+				token.Lexema = "erro6"
+				return
 			}
+			lexema = append(lexema, scannedValue[index])
 			break
 		case 18:
 			token.Classe = classe.LITERAL
@@ -199,9 +228,13 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			break
 		case 20:
 			currentStatus = validaQ20(scannedValue[index])
-			if currentStatus != -1 {
-				lexema = append(lexema, scannedValue[index])
+			if currentStatus == -1 {
+				finalPosition = initialPosition + index
+				token.Classe = classe.ERRO
+				token.Lexema = "erro7"
+				return
 			}
+			lexema = append(lexema, scannedValue[index])
 			break
 		case 21:
 			if index == len(scannedValue) {
@@ -263,9 +296,8 @@ func validaQ0(character rune) (targetStatus int) {
 		return 12
 	} else if contains(getCaracteresDeOperadorMatematico(), character) {
 		return 13
-	} else {
-		return -1
 	}
+	return -1
 }
 
 func validaQ1(character rune) (targetStatus int) {

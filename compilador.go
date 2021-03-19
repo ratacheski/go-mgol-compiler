@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/ratacheski/go-mgol-compiler/structs"
+	"github.com/ratacheski/go-mgol-compiler/structs/classe"
 	"log"
 	"os"
 )
@@ -17,13 +19,18 @@ var (
 
 func main() {
 	leArquivoFonte()
-	for _, line := range lines {
-		initialPosition := 0
-		for initialPosition < len(line) {
+	for linePosition, line := range lines {
+		columnPosition := 0
+		for columnPosition < len(line) {
 			var token structs.Token
-			initialPosition, token = Scanner(initialPosition, line)
-			if token.Classe != "" {
-				log.Println(token)
+			columnPosition, token = Scanner(columnPosition, line)
+			if token.Classe != "" && token.Classe != classe.ERRO {
+				fmt.Print("\033[32m") //Colorização Verde do log
+				log.Println("Classe:", token.Classe, ", Lexema:", token.Lexema, ", Tipo:", token.Tipo)
+				fmt.Print("\033[0m") // Reset de cor do log
+			} else {
+				ShowError(token, columnPosition+1, linePosition+1)
+				columnPosition++
 			}
 		}
 	}

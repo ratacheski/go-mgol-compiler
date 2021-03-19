@@ -1,6 +1,7 @@
 package structs
 
 import (
+	"fmt"
 	"github.com/ratacheski/go-mgol-compiler/structs/classe"
 	"log"
 )
@@ -10,7 +11,9 @@ type SymbolTable map[string]Token
 var TabelaDeSimbolos SymbolTable
 
 func init() {
+	fmt.Print("\033[33m") //Colorização Amarela do log
 	log.Println("Inicializando Tabela de Símbolos")
+	fmt.Print("\033[0m") // Reset de cor do log
 	TabelaDeSimbolos = make(map[string]Token)
 	TabelaDeSimbolos = TabelaDeSimbolos.NovaTabelaDeSimbolos()
 }
