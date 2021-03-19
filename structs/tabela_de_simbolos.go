@@ -5,94 +5,78 @@ import (
 	"log"
 )
 
-type SymbolTable []Token
+type SymbolTable map[string]Token
 
 var TabelaDeSimbolos SymbolTable
 
 func init() {
 	log.Println("Inicializando Tabela de Símbolos")
+	TabelaDeSimbolos = make(map[string]Token)
 	TabelaDeSimbolos = TabelaDeSimbolos.NovaTabelaDeSimbolos()
 }
 
 func AddTokenToSymbolTableIfNotExists(token Token) {
-	for _, item := range TabelaDeSimbolos {
-		if item.Lexema == token.Lexema {
-			return
-		}
+	if _, present := TabelaDeSimbolos[token.Lexema]; !present {
+		TabelaDeSimbolos[token.Lexema] = token
 	}
-	TabelaDeSimbolos = append(TabelaDeSimbolos, token)
 }
 
 func (tabela SymbolTable) NovaTabelaDeSimbolos() SymbolTable {
-	inicio := Token{
+	tabela[classe.INICIO] = Token{
 		Classe: classe.INICIO,
 		Lexema: classe.INICIO,
 	}
-	tabela = append(tabela, inicio)
-	varInicio := Token{
+	tabela[classe.VAR_INICIO] = Token{
 		Classe: classe.VAR_INICIO,
 		Lexema: classe.VAR_INICIO,
 	}
-	tabela = append(tabela, varInicio)
-	varFim := Token{
+	tabela[classe.VAR_FIM] = Token{
 		Classe: classe.VAR_FIM,
 		Lexema: classe.VAR_FIM,
 	}
-	tabela = append(tabela, varFim)
-	escreva := Token{
+	tabela[classe.ESCREVA] = Token{
 		Classe: classe.ESCREVA,
 		Lexema: classe.ESCREVA,
 	}
-	tabela = append(tabela, escreva)
-	leia := Token{
+	tabela[classe.LEIA] = Token{
 		Classe: classe.LEIA,
 		Lexema: classe.LEIA,
 	}
-	tabela = append(tabela, leia)
-	se := Token{
+	tabela[classe.SE] = Token{
 		Classe: classe.SE,
 		Lexema: classe.SE,
 	}
-	tabela = append(tabela, se)
-	entao := Token{
+	tabela[classe.ENTAO] = Token{
 		Classe: classe.ENTAO,
 		Lexema: classe.ENTAO,
 	}
-	tabela = append(tabela, entao)
-	fimSe := Token{
+	tabela[classe.FIM_SE] = Token{
 		Classe: classe.FIM_SE,
 		Lexema: classe.FIM_SE,
 	}
-	tabela = append(tabela, fimSe)
-	facaAte := Token{
+	tabela[classe.FACE_ATE] = Token{
 		Classe: classe.FACE_ATE,
 		Lexema: classe.FACE_ATE,
 	}
-	tabela = append(tabela, facaAte)
-	fimFaca := Token{
+	tabela[classe.FIM_FACA] = Token{
 		Classe: classe.FIM_FACA,
 		Lexema: classe.FIM_FACA,
 	}
-	tabela = append(tabela, fimFaca)
-	fim := Token{
+	tabela[classe.FIM] = Token{
 		Classe: classe.FIM,
 		Lexema: classe.FIM,
 	}
-	tabela = append(tabela, fim)
-	inteiro := Token{
+	tabela[classe.INTEIRO] = Token{
 		Classe: classe.INTEIRO,
 		Lexema: classe.INTEIRO,
 	}
-	tabela = append(tabela, inteiro)
-	lit := Token{
+	tabela[classe.LIT] = Token{
 		Classe: classe.LIT,
 		Lexema: classe.LIT,
 	}
-	tabela = append(tabela, lit)
-	tokenReal := Token{
+	tabela[classe.REAL] = Token{
 		Classe: classe.REAL,
 		Lexema: classe.REAL,
 	}
-	tabela = append(tabela, tokenReal)
 	return tabela
 }
