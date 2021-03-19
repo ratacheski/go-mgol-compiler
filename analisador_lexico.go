@@ -67,7 +67,7 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				return initialPosition + index, token
 			} else if currentStatus == -1 {
 				token.Classe = classe.ID
-				token.Lexema = string(scannedValue[:initialPosition+index-1])
+				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
 				structs.AddTokenToSymbolTableIfNotExists(token)
 				return
