@@ -15,9 +15,12 @@ func init() {
 	TabelaDeSimbolos = TabelaDeSimbolos.NovaTabelaDeSimbolos()
 }
 
-func AddTokenToSymbolTableIfNotExists(token Token) {
-	if _, present := TabelaDeSimbolos[token.Lexema]; !present {
+func AddTokenToSymbolTableIfNotExists(token Token) (returnToken Token) {
+	if returnToken, present := TabelaDeSimbolos[token.Lexema]; !present {
 		TabelaDeSimbolos[token.Lexema] = token
+		return token
+	} else {
+		return returnToken
 	}
 }
 

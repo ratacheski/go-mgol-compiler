@@ -55,7 +55,7 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				token.Classe = classe.ID
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
-				structs.AddTokenToSymbolTableIfNotExists(token)
+				token = structs.AddTokenToSymbolTableIfNotExists(token)
 				return
 			}
 			currentStatus = validaQ4(scannedValue[index])
@@ -63,13 +63,13 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				token.Classe = classe.ID
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
-				structs.AddTokenToSymbolTableIfNotExists(token)
+				token = structs.AddTokenToSymbolTableIfNotExists(token)
 				return initialPosition + index, token
 			} else if currentStatus == -1 {
 				token.Classe = classe.ID
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
-				structs.AddTokenToSymbolTableIfNotExists(token)
+				token = structs.AddTokenToSymbolTableIfNotExists(token)
 				return
 			} else {
 				lexema = append(lexema, scannedValue[index])
