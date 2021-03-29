@@ -1,5 +1,10 @@
 inicio
 varinicio
+{
+Conteúdo
+de
+coméntário
+}
 A lit;
 B inteiro;
 D inteiro;

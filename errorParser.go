@@ -3,11 +3,16 @@ package main
 import (
 	"fmt"
 	"github.com/ratacheski/go-mgol-compiler/structs"
-	"log"
 	"strings"
 )
 
-func ShowError(token structs.Token, columnPosition int, linePosition int) {
+func ShowError(token structs.Token, errorPosition int, code string) {
+	if errorPosition == len(code) {
+		errorPosition--
+	}
+	split := strings.Split(code[:errorPosition+1], "\n")
+	columnPosition := len(split[len(split)-1])
+	linePosition := len(split)
 	errorMsg := ""
 	switch token.Lexema {
 	case "erro1":
@@ -33,6 +38,6 @@ func ShowError(token structs.Token, columnPosition int, linePosition int) {
 		break
 	}
 	fmt.Print("\033[31m") //Colorização Vermelha do log
-	log.Println(strings.ToUpper(token.Lexema), "-", errorMsg, ", linha", linePosition, ", coluna", columnPosition)
+	fmt.Println(strings.ToUpper(token.Lexema), "-", errorMsg, ", linha", linePosition, ", coluna", columnPosition)
 	fmt.Print("\033[0m") // Reset de cor do log
 }

@@ -23,14 +23,14 @@ func contains(s []rune, str rune) bool {
 	return false
 }
 
-func Scanner(initialPosition int, line string) (finalPosition int, token structs.Token) {
+func Scanner(initialPosition int, fileContent string) (finalPosition int, token structs.Token) {
 	currentStatus := 0
-	scannedValue := []rune(line[initialPosition:])
-	lexema := []rune("")
+	scannedValue := fileContent[initialPosition:]
+	lexema := []byte("")
 	for index := 0; index <= len(scannedValue); index++ {
 		switch currentStatus {
 		case 0:
-			currentStatus = validaQ0(scannedValue[index])
+			currentStatus = validaQ0(rune(scannedValue[index]))
 			if currentStatus == -1 {
 				finalPosition = initialPosition + index
 				token.Classe = classe.ERRO
@@ -47,7 +47,7 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				token.Lexema = "erro2"
 				return
 			}
-			currentStatus = validaQ1(scannedValue[index])
+			currentStatus = validaQ1(rune(scannedValue[index]))
 			lexema = append(lexema, scannedValue[index])
 			break
 		case 2:
@@ -56,7 +56,7 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			finalPosition = initialPosition + index
 			return
 		case 3:
-			currentStatus = validaQ3(scannedValue[index])
+			currentStatus = validaQ3(rune(scannedValue[index]))
 			if currentStatus == -1 {
 				finalPosition = initialPosition + index
 				token.Classe = classe.ERRO
@@ -73,13 +73,13 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				token = structs.AddTokenToSymbolTableIfNotExists(token)
 				return
 			}
-			currentStatus = validaQ4(scannedValue[index])
+			currentStatus = validaQ4(rune(scannedValue[index]))
 			if currentStatus == 0 {
 				token.Classe = classe.ID
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
 				token = structs.AddTokenToSymbolTableIfNotExists(token)
-				return initialPosition + index, token
+				return
 			} else if currentStatus == -1 {
 				token.Classe = classe.ID
 				token.Lexema = string(lexema)
@@ -107,12 +107,12 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				finalPosition = initialPosition + index
 				return
 			}
-			currentStatus = validaQ7(scannedValue[index])
+			currentStatus = validaQ7(rune(scannedValue[index]))
 			if currentStatus == 0 {
 				token.Classe = classe.OPR
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
-				return initialPosition + index, token
+				return
 			} else if currentStatus == -1 {
 				token.Classe = classe.OPR
 				token.Lexema = string(lexema)
@@ -129,12 +129,12 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				finalPosition = initialPosition + index
 				return
 			}
-			currentStatus = validaQ8(scannedValue[index])
+			currentStatus = validaQ8(rune(scannedValue[index]))
 			if currentStatus == 0 {
 				token.Classe = classe.NUM
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
-				return initialPosition + index, token
+				return
 			} else if currentStatus == -1 {
 				token.Classe = classe.NUM
 				token.Lexema = string(lexema)
@@ -151,9 +151,14 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				token.Lexema = "erro4"
 				return
 			}
-			currentStatus = validaQ9(scannedValue[index])
+			currentStatus = validaQ9(rune(scannedValue[index]))
 			lexema = append(lexema, scannedValue[index])
 			break
+		case 10:
+			token.Classe = classe.EOF
+			token.Lexema = classe.EOF
+			finalPosition = initialPosition + index
+			return
 		case 11:
 			token.Classe = classe.FC_P
 			token.Lexema = string(lexema)
@@ -180,7 +185,7 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			finalPosition = initialPosition + index
 			return
 		case 16:
-			currentStatus = validaQ16(scannedValue[index])
+			currentStatus = validaQ16(rune(scannedValue[index]))
 			if currentStatus == -1 {
 				finalPosition = initialPosition + index
 				token.Classe = classe.ERRO
@@ -190,7 +195,7 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			lexema = append(lexema, scannedValue[index])
 			break
 		case 17:
-			currentStatus = validaQ17(scannedValue[index])
+			currentStatus = validaQ17(rune(scannedValue[index]))
 			if currentStatus == -1 {
 				finalPosition = initialPosition + index
 				token.Classe = classe.ERRO
@@ -211,12 +216,12 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				finalPosition = initialPosition + index
 				return
 			}
-			currentStatus = validaQ19(scannedValue[index])
+			currentStatus = validaQ19(rune(scannedValue[index]))
 			if currentStatus == 0 {
 				token.Classe = classe.NUM
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
-				return initialPosition + index, token
+				return
 			} else if currentStatus == -1 {
 				token.Classe = classe.NUM
 				token.Lexema = string(lexema)
@@ -227,7 +232,7 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 			}
 			break
 		case 20:
-			currentStatus = validaQ20(scannedValue[index])
+			currentStatus = validaQ20(rune(scannedValue[index]))
 			if currentStatus == -1 {
 				finalPosition = initialPosition + index
 				token.Classe = classe.ERRO
@@ -243,12 +248,12 @@ func Scanner(initialPosition int, line string) (finalPosition int, token structs
 				finalPosition = initialPosition + index
 				return
 			}
-			currentStatus = validaQ21(scannedValue[index])
+			currentStatus = validaQ21(rune(scannedValue[index]))
 			if currentStatus == 0 {
 				token.Classe = classe.NUM
 				token.Lexema = string(lexema)
 				finalPosition = initialPosition + index
-				return initialPosition + index, token
+				return
 			} else if currentStatus == -1 {
 				token.Classe = classe.NUM
 				token.Lexema = string(lexema)
@@ -290,6 +295,8 @@ func validaQ0(character rune) (targetStatus int) {
 		return 8
 	} else if character == '"' {
 		return 9
+	} else if character == 3 {
+		return 10
 	} else if character == ')' {
 		return 11
 	} else if character == '(' {
