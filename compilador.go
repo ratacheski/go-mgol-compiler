@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/ratacheski/go-mgol-compiler/structs"
-	"github.com/ratacheski/go-mgol-compiler/structs/classe"
 	"io/ioutil"
 	"os"
 )
@@ -13,25 +11,13 @@ const (
 )
 
 var (
-	code  string
-	lines []string
+	code string
 )
 
 func main() {
 	leArquivoFonte()
-	columnPosition := 0
-	for columnPosition < len(code) {
-		var token structs.Token
-		columnPosition, token = Scanner(columnPosition, code)
-		if token.Classe != "" && token.Classe != classe.ERRO {
-			fmt.Print("\033[32m") //Colorização Verde do log
-			fmt.Printf("Classe: %s, Lexema: %s, Tipo: %+v\n", token.Classe, token.Lexema, token.Tipo)
-			fmt.Print("\033[0m") // Reset de cor do log
-		} else {
-			ShowError(token, columnPosition, code)
-			columnPosition++
-		}
-	}
+	//analiseLexica()
+	analiseSintatica()
 }
 
 func leArquivoFonte() {
