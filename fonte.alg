@@ -1,10 +1,12 @@
 inicio
+
+{declaração de variáveis}
 varinicio
-lit A;
-inteiro B;
-inteiro D;
-real C;
+    lit A, E ;
+    inteiro B, D;
+    real C;
 varfim;
+
 escreva "Digite B";
 leia B;
 escreva "Digite A:";
